@@ -1,0 +1,21 @@
+Source: rabbitmq-stomp
+Priority: extra
+Maintainer: David Cuadrado <krawek@gmail.com>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.8.0
+Section: libs
+Homepage: http://hg.rabbitmq.com/rabbitmq-stomp/
+
+Package: rabbitmq-stomp
+Section: libs
+Architecture: any
+Depends: rabbitmq-server ${shlibs:Depends}, ${misc:Depends}
+Description: This is a STOMP transport plugin for use with RabbitMQ.
+ You can get the code by checking it out from our repository with
+ hg clone http://hg.rabbitmq.com/rabbitmq-stomp/
+ Announcements regarding the transport are periodically made on the
+ RabbitMQ mailing list, and on LShift's blog.                      
+ - http://lists.rabbitmq.com/cgi-bin/mailman/listinfo/rabbitmq-discuss
+ - http://www.lshift.net/blog/                                        
+ - http://www.lshift.net/blog/category/lshift-sw/rabbitmq/    
+

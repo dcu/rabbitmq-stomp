@@ -1,0 +1,65 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+export DESTDIR=$(CURDIR)/debian/rabbitmq-stomp/usr/lib/erlang/lib/rabbitmq-stomp
+
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	touch configure-stamp
+
+
+build: build-stamp
+build-stamp: configure-stamp
+	dh_testdir
+
+	$(MAKE) RABBIT_SOURCE_ROOT=/usr/lib/erlang/lib/ RABBIT_SERVER_SOURCE_ROOT=/usr/lib/erlang/lib/rabbitmq_server-1.5.4/
+
+	touch $@
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+
+	$(MAKE) clean
+
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
+
+	mkdir -p $(DESTDIR)
+	cp -r $(CURDIR)/ebin $(CURDIR)/include $(DESTDIR)
+
+	mkdir -p $(CURDIR)/debian/rabbitmq-stomp/etc/rabbitmq/
+	cp $(CURDIR)/debian/rabbitmq.conf $(CURDIR)/debian/rabbitmq-stomp/etc/rabbitmq/rabbitmq.conf
+
+
+# Build architecture-independent files here.
+binary-indep: install
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+#	dh_installdocs
+#	dh_installexamples
+	dh_install
+	dh_compress
+	dh_fixperms
+#	dh_makeshlibs
+	dh_installdeb
+#	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure
+

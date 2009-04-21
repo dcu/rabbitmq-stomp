@@ -1,0 +1,5 @@
+usr/lib/erlang/lib/rabbit-stomp
+usr/lib/erlang/lib/rabbit-stomp/ebin
+usr/lib/erlang/lib/rabbit-stomp/include
+usr/lib/erlang/lib/rabbit-stomp/include/ebin
+etc/rabbitmq
